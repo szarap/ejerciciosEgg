@@ -1,0 +1,51 @@
+///	Disponemos de un vector unidimensional de 20 elementos de tipo carácter. Se pide
+///	desarrollar un programa que:
+///
+///		a) Pida una frase al usuario y luego ingrese la frase dentro del arreglo letra por letra.
+///		Ayuda: utilizar la función Subcadena de PSeInt.
+///
+///		b) Una vez completado lo anterior, pedirle al usuario un carácter cualquiera y una
+///		posición dentro del arreglo, y el programa debe intentar ingresar el carácter en la
+///		posición indicada, si es que hay lugar (es decir la posición está vacía o es un espacio
+///		en blanco). De ser posible debe mostrar el vector con la frase y el carácter ingresado,
+///		de lo contrario debe darle un mensaje al usuario de que esa posición estaba ocupada.
+
+Subproceso IMPRIMIR_ARREGLO(Arreglo,DL)
+	definir i Como Entero
+	Escribir ""
+	para i=0 hasta DL-1
+		Escribir sin saltar"[",Arreglo[i],"]"
+	FinPara
+	Escribir ""
+FinSubProceso
+
+Algoritmo Ej6
+	Definir input,Vector como caracter
+	Definir DF,i,pos Como Entero
+	DF=20
+	Dimension Vector(20)
+	//recoorrer la frase y asignar una posicion
+	Escribir "Ingrese una frase o palabra:"
+	leer input
+	para i=0 hasta DF-1
+		Vector[i]=Subcadena(input,i,i)
+	FinPara
+	
+	Escribir "Ahora, ingrese un solo caracter para insertar en el arreglo"
+	leer input
+	Mientras Longitud(input)>1
+		Escribir "Un solo caracter!"
+		leer input
+	FinMientras
+	
+	Escribir "Ahora ingrese un numero del 0 al 19, para insertar ese caracter"
+	leer pos
+	si Vector[pos]=" " o Vector[pos]=""
+		Vector[pos]=input
+	SiNo
+		Escribir "Perdón! el espacio esta ocupado."
+	FinSi
+	
+	IMPRIMIR_ARREGLO(Vector,DF)
+FinAlgoritmo
+

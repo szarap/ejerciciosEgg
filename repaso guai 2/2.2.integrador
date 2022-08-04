@@ -1,0 +1,88 @@
+Algoritmo sin_titulo
+	definir usuario, contrasenia, opc, acept Como Caracter
+	definir cont, cantbotellas, pesobotella, valorMonetario, saldo , opcPeso, i Como Entero
+	definir Login, Salir Como logico
+	
+	cont = 0
+	Login = Falso
+	Salir = Falso
+	Escribir "ingrese su usuario: "
+	leer usuario
+	Mientras cont<>3 y Login=Falso Hacer
+		
+		Escribir "ingrese su contraseña: "
+		leer contrasenia
+		
+		si (usuario = "Albus_D") Entonces
+			si (contrasenia = "caramelosDeLimon") Entonces
+				Login = Verdadero
+			FinSi
+		FinSi
+		cont = cont + 1
+	Fin Mientras
+	saldo = 0
+	Salir = Falso
+	si Login = Verdadero Entonces
+		Repetir
+			Escribir "* Seleccione la opción deseada * "
+			Escribir "(I) Ingresar botellas - (C) Consultar saldo o (S) Salir"
+			leer opc 
+			opc = Mayusculas(opc)
+			Mientras opc<>"I" y opc<>"C" y opc<>"S" Hacer
+				Escribir "ingresó una opción invalida"
+				Escribir "(I) Ingresar botellas - (C) Consultar saldo o (S) Salir"
+				leer opc 
+			Fin Mientras
+			si opc="I"
+				Escribir "ingrese la cantidad de botellas"
+				leer cantbotellas
+				Para i<-1 Hasta cantbotellas Con Paso 1 Hacer
+					valorMonetario = 0
+					pesobotella = Aleatorio(100, 3000)
+					si pesobotella < 500
+						opcPeso = 1
+					sino
+						si pesobotella <=1500
+							opcPeso = 2
+						SiNo
+							opcPeso = 3
+						FinSi
+					FinSi
+					Segun opcPeso Hacer
+						1:
+							valorMonetario = 50 
+						2:
+							valorMonetario = 125
+						3:
+							valorMonetario = 200
+						De Otro Modo:
+							Escribir "error en el peso de botella"
+					Fin Segun
+					Escribir "El valor por la botella # ", i, " ingresada es: ", valorMonetario
+					Escribir "Acepta? (S) SI o (N) NO"
+					leer acept
+					acept = Mayusculas(acept)
+					si (acept = "N")
+						Escribir "Devolviendo material"
+					SiNo
+						saldo = saldo + valorMonetario
+					FinSi
+				Fin Para
+				Escribir "* Finalizó el ingreso de botellas *"
+			FinSi
+			si opc="C"
+				Escribir "su saldo es: ", saldo
+			FinSi
+			si opc="S"
+				Escribir "Saliendo..."
+				Salir = Verdadero
+			FinSi
+			Mientras Que Salir=Falso
+	SiNo
+		Escribir "Contraseña o Usuario invalido. Y se alcanzó el maximo numero de intentos"
+	FinSi
+	
+	
+	
+	
+FinAlgoritmo

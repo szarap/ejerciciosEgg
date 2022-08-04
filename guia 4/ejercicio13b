@@ -1,0 +1,84 @@
+SubProceso RellenarMatriz(matriz,n)
+	Definir i, j Como Entero
+	Para i <- 0 Hasta n - 1
+		Escribir "Fila " i 
+		Para j <- 0 Hasta  n - 1
+			Hacer
+				Leer matriz(i,j) 
+			Mientras Que matriz(i,j) <= 1 y matriz(i,j) >= 9
+		FinPara
+	FinPara
+FinSubProceso
+
+Funcion esMagica <- VerificarFilas(matriz, n, sumaGuardada)
+	Definir esMagica Como Logico
+	Definir suma, i, j Como Entero
+	i = 1
+	Hacer
+		suma = 0
+		Para j <- 0 Hasta n - 1 
+			suma = suma + matriz(i,j)
+		FinPara
+		i = i + 1
+		esMagica = suma == sumaGuardada
+	Mientras Que esMagica y i < n
+FinFuncion
+
+Funcion esMagica <- VerificarColumnas(matriz, n, sumaGuardada)
+	Definir esMagica Como Logico
+	Definir suma, i, j Como Entero
+	j = 0
+	Hacer
+		suma = 0
+		Para i <- 0 Hasta n - 1 
+			suma = suma + matriz(i,j)
+		FinPara
+		j = j + 1
+		esMagica = suma == sumaGuardada
+	Mientras Que esMagica y j < n
+FinFuncion
+
+Funcion esMagica <- VerificarDiagonales(matriz, n, sumaGuardada)
+	Definir esMagica Como Logico
+	Definir suma, i, j Como Entero
+	suma = 0
+	Para i <- 0 Hasta n - 1 
+		suma = suma + matriz(i,i)
+	FinPara
+	esMagica = suma == sumaGuardada
+	Si esMagica Entonces
+		j = 2
+		suma = 0
+		Para i <- 0 Hasta n - 1 
+			suma = suma + matriz(i,j)
+			j = j - 1
+		FinPara
+		esMagica = suma == sumaGuardada
+	FinSi
+FinFuncion
+
+SubProceso ComprobarMatrizMagica(matriz, n)
+	Definir sumaGuardada, j Como Entero
+	Definir esMagica Como Logico
+	sumaGuardada = 0
+	Para j <- 0 Hasta n - 1 
+		sumaGuardada = sumaGuardada + matriz(0,j)
+	FinPara
+	esMagica = VerificarFilas(matriz,n,sumaGuardada) y VerificarColumnas(matriz,n,sumaGuardada) y VerificarDiagonales(matriz,n,sumaGuardada)
+	Si esMagica Entonces
+		Escribir "La matriz ingresada es mágica. La suma es " sumaGuardada
+	SiNo
+		Escribir "La matriz no es mágica"
+	FinSi
+FinSubProceso
+
+Algoritmo ejercicio13
+	Definir matrizMagica, n Como Entero
+	Hacer
+		Escribir "Ingrese la dimensión de la matriz magica (< o = 10)"
+		Leer n
+	Mientras Que n <= 1 y n >= 10
+	Dimension matrizMagica(n,n) 
+	RellenarMatriz(matrizMagica,n)
+	ComprobarMatrizMagica(matrizMagica,n)
+FinAlgoritmo
